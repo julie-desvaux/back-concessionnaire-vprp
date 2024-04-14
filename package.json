@@ -1,4 +1,19 @@
 {
+  "name": "Back VPRPR",
+  "version": "1.0.0",
+  "description": "Back Concessionnaire VPRP",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "start index.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julie-desvaux/back-concessionnaire-vprp.git"
+  },
+  "author": "julie-desvaux",
+  "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
