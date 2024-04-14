@@ -15,6 +15,10 @@ const PORT = process.env.PORT || 3001;
 //     credentials: true,
 //   })
 // );
+
+import connectDB from "./config/db.js";
+connectDB();
+
 app.use(express.json());
 app.use("/api", require("./routers/api.js"));
 
