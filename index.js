@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config({
   path: ".env",
@@ -16,8 +17,14 @@ const PORT = process.env.PORT || 3001;
 //   })
 // );
 
-import connectDB from "./config/db.js";
-connectDB();
+mongoose
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch(() => {
+    console.log("Couldn't connect to MongoDB");
+  });
 
 app.use(express.json());
 app.use("/api", require("./routers/api.js"));

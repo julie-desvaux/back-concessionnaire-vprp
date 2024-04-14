@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const Marque = require("../models/marque");
+const Marque = require("../mongo/model/MarqueModel");
 
 exports.marqueById = (req, res, next, id) => {
   Marque.findById(id).exec((err, marque) => {
