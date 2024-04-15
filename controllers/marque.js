@@ -14,15 +14,10 @@ exports.marqueById = (req, res, next, id) => {
   });
 };
 
-exports.allMarques = (req, res) => {
-  Marque.find((err, marques) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    res.json({
-      marques,
-    });
+exports.allMarques = async (req, res) => {
+  const result = await Marque.find();
+
+  res.json({
+    result,
   });
 };

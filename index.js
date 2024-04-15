@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config({
   path: ".env",
 });
+const Marque = require("./mongo/model/MarqueModel");
 
 const app = express();
 
@@ -18,7 +19,7 @@ const PORT = process.env.PORT || 3001;
 // );
 
 mongoose
-  .connect(process.env.MONGO_URL, { useNewUrlParser: true })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -27,7 +28,17 @@ mongoose
   });
 
 app.use(express.json());
-app.use("/api", require("./routers/api.js"));
+// app.use("/api/", require("./routers/api.js"));
+
+app.get("/api/marque", async (req, res) => {
+  const search = req.params.pokemon;
+  const pokemon = await Marque.find();
+  if (pokemon) {
+    res.json(pokemon);
+  } else {
+    res.json({ error: "notFound" });
+  }
+});
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`);
