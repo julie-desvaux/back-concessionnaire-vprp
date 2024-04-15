@@ -34,7 +34,7 @@ app.get("/api/marque", async (req, res) => {
 });
 
 app.get("/api/marque/:slug", async (req, res) => {
-  const id = req.params.id;
+  const slug = req.params.slug;
   const allCarsMarque = await Model.find({ marque: { slug } })
     .populate("marque")
     .exec();
