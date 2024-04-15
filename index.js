@@ -9,7 +9,7 @@ const Marque = require("./mongo/model/MarqueModel");
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // app.use(
 //   cors({
@@ -31,10 +31,9 @@ app.use(express.json());
 // app.use("/api/", require("./routers/api.js"));
 
 app.get("/api/marque", async (req, res) => {
-  const search = req.params.pokemon;
-  const pokemon = await Marque.find();
-  if (pokemon) {
-    res.json(pokemon);
+  const marques = await Marque.find();
+  if (marques) {
+    res.json(marques);
   } else {
     res.json({ error: "notFound" });
   }
