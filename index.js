@@ -35,17 +35,13 @@ app.get("/api/marque", async (req, res) => {
 
 app.get("/api/marque/:slug", async (req, res) => {
   const slug = req.params.slug;
-  console.log({ slug });
   const allCarsMarque = await Model.find()
-    .populate({
-      path: "marque",
-      match: {
-        slug: slug,
-      },
-    })
+    .populate({ path: "marque", match: { slug: slug } })
     .exec();
+
   if (allCarsMarque) {
-    res.json(allCarsMarque);
+    const carsMarque = allCarsMarque.filter((car) => car.marque !== null);
+    res.json(carsMarque);
   } else {
     res.json({ error: "notFound" });
   }
