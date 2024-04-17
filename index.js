@@ -66,6 +66,22 @@ app.get("/api/model/:id", async (req, res) => {
   }
 });
 
+app.post("/api/model", async (req, res) => {
+  try {
+    const model = await Model.create(req.body);
+    res.json({
+      success: true,
+      data: model,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: error,
+    });
+  }
+});
+
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`);
 });
