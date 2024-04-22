@@ -14,6 +14,8 @@ const ModelModel = mongoose.model(
         ref: "Marque",
         required: true,
       },
+      isNew: { type: Boolean, default: false },
+      extras: [{ type: String }],
     },
     {
       timestamps: true,
