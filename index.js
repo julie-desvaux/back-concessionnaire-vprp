@@ -33,6 +33,22 @@ app.get("/api/marque", async (req, res) => {
   }
 });
 
+app.post("/api/marque", async (req, res) => {
+  try {
+    const marque = await Marque.create(req.body);
+    res.json({
+      success: true,
+      data: marque,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: error,
+    });
+  }
+});
+
 app.get("/api/marque/:slug", async (req, res) => {
   const slug = req.params.slug;
   const allCarsMarque = await Model.find()

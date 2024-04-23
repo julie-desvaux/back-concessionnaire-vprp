@@ -5,6 +5,7 @@ const MarqueModel = mongoose.model(
   new mongoose.Schema(
     {
       marque: { type: String, required: true },
+      slug: { type: String, required: true },
     },
     {
       timestamps: true,
