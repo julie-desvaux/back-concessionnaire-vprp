@@ -52,6 +52,7 @@ app.post("/api/marque", async (req, res) => {
 app.get("/api/marque/:slug", async (req, res) => {
   const slug = req.params.slug;
   const allCarsMarque = await Model.find()
+    .sort({ price: 1 })
     .populate({ path: "marque", match: { slug: slug } })
     .exec();
 
