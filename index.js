@@ -64,11 +64,36 @@ app.get("/api/marque/:slug", async (req, res) => {
 });
 
 app.get("/api/model", async (req, res) => {
-  const models = await Model.find().populate("marque").exec();
-  if (models) {
-    res.json(models);
+  const filters = req.query; // Les filtres seront dans req.query
+
+  if (filters) {
+    // Construire la requête de recherche en fonction des filtres
+    const query = Model.find().populate("marque");
+    if (filters.nouveau) {
+      query.where("isNew").equals(filters.nouveau);
+    }
+    // if (filters.priceMin) {
+    //   query.where("price").gte(filters.priceMin);
+    // }
+    // if (filters.priceMax) {
+    //   query.where("price").lte(filters.priceMax);
+    // }
+
+    // Exécuter la requête
+    const models = await query.exec();
+
+    if (models) {
+      res.json(models);
+    } else {
+      res.json({ error: "notFound" });
+    }
   } else {
-    res.json({ error: "notFound" });
+    const models = await Model.find().populate("marque").exec();
+    if (models) {
+      res.json(models);
+    } else {
+      res.json({ error: "notFound" });
+    }
   }
 });
 
