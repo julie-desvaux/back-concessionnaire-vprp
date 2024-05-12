@@ -6,7 +6,6 @@ const ModelMoto = mongoose.model(
     {
       model: { type: String, required: true },
       price: { type: Number, required: true },
-      type: { type: String },
       vmax: { type: Number },
       slug: { type: String, required: true },
       images: [{ type: String }],
