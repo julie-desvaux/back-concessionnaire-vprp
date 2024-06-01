@@ -4,7 +4,7 @@ const TypeMoto = require("../mongo/model/TypeMoto");
 
 const getAllMarquesVelos = async (req, res) => {
   console.log("getAllMarquesVelos");
-  const marques = await MarqueVelo.find().populate("type").exec();
+  const marques = await MarqueVelo.find().populate("marque").exec();
   if (marques) {
     res.json(marques);
   } else {
