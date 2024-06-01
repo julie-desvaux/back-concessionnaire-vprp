@@ -17,7 +17,6 @@ const ModelScooter = mongoose.model(
       type: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Type",
-        required: true,
       },
       isNew: { type: Boolean, default: false },
       extras: [{ type: String }],

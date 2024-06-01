@@ -32,7 +32,7 @@ const getAllScootersByMarque = async (req, res) => {
   const slug = req.params.slug;
   const allScootersMarque = await ModelScooter.find()
     .sort({ price: 1 })
-    .populate({ path: "marque", match: { slug } }, { path: "type" })
+    .populate({ path: "marque", match: { slug } })
     .exec();
 
   if (allScootersMarque) {
@@ -50,7 +50,7 @@ const getAllScootersByMarqueWithFilters = async (req, res) => {
 
   if (filters) {
     // Construire la requête de recherche en fonction des filtres
-    const query = ModelScooter.find().populate("marque").populate("type");
+    const query = ModelScooter.find().populate("marque");
     if (filters.nouveau) {
       query.where("isNew").equals(filters.nouveau);
     }
@@ -70,9 +70,7 @@ const getAllScootersByMarqueWithFilters = async (req, res) => {
       res.json({ error: "notFound" });
     }
   } else {
-    const models = await (await ModelScooter.find().populate("marque"))
-      .populate("type")
-      .exec();
+    const models = await ModelScooter.find().populate("marque").exec();
     if (models) {
       res.json(models);
     } else {
@@ -83,10 +81,7 @@ const getAllScootersByMarqueWithFilters = async (req, res) => {
 
 const getScooterById = async (req, res) => {
   const id = req.params.id;
-  const model = await ModelScooter.findById(id)
-    .populate("marque")
-    .populate("type")
-    .exec();
+  const model = await ModelScooter.findById(id).populate("marque").exec();
   if (model) {
     res.json(model);
   } else {

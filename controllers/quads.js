@@ -4,7 +4,7 @@ const TypeMoto = require("../mongo/model/TypeMoto");
 
 const getAllMarquesQuads = async (req, res) => {
   console.log("getAllMarquesQuads");
-  const marques = await MarqueQuad.find().populate("type").exec();
+  const marques = await MarqueQuad.find().exec();
   if (marques) {
     res.json(marques);
   } else {
@@ -32,7 +32,7 @@ const getAllQuadsByMarque = async (req, res) => {
   const slug = req.params.slug;
   const allQuadsMarque = await ModelQuad.find()
     .sort({ price: 1 })
-    .populate({ path: "marque", match: { slug } }, { path: "type" })
+    .populate({ path: "marque", match: { slug } })
     .exec();
 
   if (allQuadsMarque) {
@@ -48,7 +48,7 @@ const getAllQuadsByMarqueWithFilters = async (req, res) => {
 
   if (filters) {
     // Construire la requête de recherche en fonction des filtres
-    const query = ModelQuad.find().populate("marque").populate("type");
+    const query = ModelQuad.find().populate("marque");
     if (filters.nouveau) {
       query.where("isNew").equals(filters.nouveau);
     }

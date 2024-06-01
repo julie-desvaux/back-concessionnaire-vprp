@@ -16,8 +16,7 @@ const ModelMoto = mongoose.model(
       },
       type: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Type",
-        required: true,
+        ref: "TypeMoto",
       },
       isNew: { type: Boolean, default: false },
       extras: [{ type: String }],

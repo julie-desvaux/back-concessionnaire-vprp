@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const TypeMoto = mongoose.model(
-  "Type",
+  "TypeMoto",
   new mongoose.Schema(
     {
       type: { type: String, required: true },

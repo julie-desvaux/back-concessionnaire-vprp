@@ -32,7 +32,7 @@ const getAllVelosByMarque = async (req, res) => {
   const slug = req.params.slug;
   const allVelosMarque = await ModelVelo.find()
     .sort({ price: 1 })
-    .populate({ path: "marque", match: { slug } }, { path: "type" })
+    .populate({ path: "marque", match: { slug } })
     .exec();
 
   if (allVelosMarque) {
@@ -48,7 +48,7 @@ const getAllVelosByMarqueWithFilters = async (req, res) => {
 
   if (filters) {
     // Construire la requête de recherche en fonction des filtres
-    const query = ModelVelo.find().populate("marque").populate("type");
+    const query = ModelVelo.find().populate("marque");
     if (filters.nouveau) {
       query.where("isNew").equals(filters.nouveau);
     }
@@ -68,9 +68,7 @@ const getAllVelosByMarqueWithFilters = async (req, res) => {
       res.json({ error: "notFound" });
     }
   } else {
-    const models = await (await ModelVelo.find().populate("marque"))
-      .populate("type")
-      .exec();
+    const models = await ModelVelo.find().populate("marque").exec();
     if (models) {
       res.json(models);
     } else {
@@ -81,10 +79,7 @@ const getAllVelosByMarqueWithFilters = async (req, res) => {
 
 const getVeloById = async (req, res) => {
   const id = req.params.id;
-  const model = await ModelVelo.findById(id)
-    .populate("marque")
-    .populate("type")
-    .exec();
+  const model = await ModelVelo.findById(id).populate("marque").exec();
   if (model) {
     res.json(model);
   } else {

@@ -6,11 +6,6 @@ const MarqueMoto = mongoose.model(
     {
       marque: { type: String, required: true },
       slug: { type: String, required: true },
-      type: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Type",
-        required: true,
-      },
     },
     {
       timestamps: true,
