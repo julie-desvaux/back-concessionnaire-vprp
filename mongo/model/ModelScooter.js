@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const ModelModel = mongoose.model(
-  "Model",
+const ModelScooter = mongoose.model(
+  "ModelScooter",
   new mongoose.Schema(
     {
       model: { type: String, required: true },
@@ -11,7 +11,7 @@ const ModelModel = mongoose.model(
       images: [{ type: String }],
       marque: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Marque",
+        ref: "MarqueScooter",
         required: true,
       },
       type: {
@@ -28,4 +28,4 @@ const ModelModel = mongoose.model(
   )
 );
 
-module.exports = ModelModel;
+module.exports = ModelScooter;

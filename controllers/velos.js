@@ -1,10 +1,10 @@
-const MarqueMoto = require("../mongo/model/MarqueMoto");
-const ModelMoto = require("../mongo/model/ModelMoto");
+const MarqueVelo = require("../mongo/model/MarqueVelo");
+const ModelVelo = require("../mongo/model/ModelVelo");
 const TypeMoto = require("../mongo/model/TypeMoto");
 
-const getAllMarquesMotos = async (req, res) => {
-  console.log("getAllMarquesMotos");
-  const marques = await MarqueMoto.find().populate("type").exec();
+const getAllMarquesVelos = async (req, res) => {
+  console.log("getAllMarquesVelos");
+  const marques = await MarqueVelo.find().populate("type").exec();
   if (marques) {
     res.json(marques);
   } else {
@@ -12,9 +12,9 @@ const getAllMarquesMotos = async (req, res) => {
   }
 };
 
-const addMarqueMoto = async (req, res) => {
+const addMarqueVelo = async (req, res) => {
   try {
-    const marque = await MarqueMoto.create(req.body);
+    const marque = await MarqueVelo.create(req.body);
     res.json({
       success: true,
       data: marque,
@@ -28,27 +28,27 @@ const addMarqueMoto = async (req, res) => {
   }
 };
 
-const getAllMotosByMarque = async (req, res) => {
+const getAllVelosByMarque = async (req, res) => {
   const slug = req.params.slug;
-  const allMotosMarque = await ModelMoto.find()
+  const allVelosMarque = await ModelVelo.find()
     .sort({ price: 1 })
     .populate({ path: "marque", match: { slug } }, { path: "type" })
     .exec();
 
-  if (allMotosMarque) {
-    const motosMarque = allMotosMarque.filter((moto) => moto.marque !== null);
-    res.json(motosMarque);
+  if (allVelosMarque) {
+    const VelosMarque = allVelosMarque.filter((velo) => velo.marque !== null);
+    res.json(VelosMarque);
   } else {
     res.json({ error: "notFound" });
   }
 };
 
-const getAllMotosByMarqueWithFilters = async (req, res) => {
+const getAllVelosByMarqueWithFilters = async (req, res) => {
   const filters = req.query; // Les filtres seront dans req.query
 
   if (filters) {
     // Construire la requête de recherche en fonction des filtres
-    const query = ModelMoto.find().populate("marque").populate("type");
+    const query = ModelVelo.find().populate("marque").populate("type");
     if (filters.nouveau) {
       query.where("isNew").equals(filters.nouveau);
     }
@@ -68,7 +68,7 @@ const getAllMotosByMarqueWithFilters = async (req, res) => {
       res.json({ error: "notFound" });
     }
   } else {
-    const models = await (await ModelMoto.find().populate("marque"))
+    const models = await (await ModelVelo.find().populate("marque"))
       .populate("type")
       .exec();
     if (models) {
@@ -79,9 +79,9 @@ const getAllMotosByMarqueWithFilters = async (req, res) => {
   }
 };
 
-const getMotoById = async (req, res) => {
+const getVeloById = async (req, res) => {
   const id = req.params.id;
-  const model = await ModelMoto.findById(id)
+  const model = await ModelVelo.findById(id)
     .populate("marque")
     .populate("type")
     .exec();
@@ -92,9 +92,9 @@ const getMotoById = async (req, res) => {
   }
 };
 
-const addMoto = async (req, res) => {
+const addVelo = async (req, res) => {
   try {
-    const model = await ModelMoto.create(req.body);
+    const model = await ModelVelo.create(req.body);
     res.json({
       success: true,
       data: model,
@@ -134,12 +134,12 @@ const addType = async (req, res) => {
 };
 
 module.exports = {
-  getAllMarquesMotos,
-  addMarqueMoto,
-  getAllMotosByMarque,
-  getAllMotosByMarqueWithFilters,
-  getMotoById,
-  addMoto,
+  getAllMarquesVelos,
+  addMarqueVelo,
+  getAllVelosByMarque,
+  getAllVelosByMarqueWithFilters,
+  getVeloById,
+  addVelo,
   getAllTypes,
   addType,
 };
