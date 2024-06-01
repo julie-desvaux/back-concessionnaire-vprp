@@ -31,7 +31,7 @@ app.use(express.json());
 app.use("/api/autos", autos);
 app.use("/api/motos", motos);
 app.use("/api/quads", quads);
-app.use("/api/scooter", scooters);
+app.use("/api/scooters", scooters);
 app.use("/api/velos", velos);
 app.use("/api/typevl", typevl);
 
