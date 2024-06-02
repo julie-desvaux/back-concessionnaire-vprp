@@ -68,9 +68,7 @@ const getAllQuadsByMarqueWithFilters = async (req, res) => {
       res.json({ error: "notFound" });
     }
   } else {
-    const models = await (await ModelQuad.find().populate("marque"))
-      .populate("type")
-      .exec();
+    const models = await (await ModelQuad.find().populate("marque")).exec();
     if (models) {
       res.json(models);
     } else {
@@ -81,10 +79,7 @@ const getAllQuadsByMarqueWithFilters = async (req, res) => {
 
 const getQuadById = async (req, res) => {
   const id = req.params.id;
-  const model = await ModelQuad.findById(id)
-    .populate("marque")
-    .populate("type")
-    .exec();
+  const model = await ModelQuad.findById(id).populate("marque").exec();
   if (model) {
     res.json(model);
   } else {
