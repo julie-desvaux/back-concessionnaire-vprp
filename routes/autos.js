@@ -1,21 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAllMarquesAutos,
-  addMarqueAuto,
-  getAllCarsByMarque,
-  getAllCarsByMarqueWithFilters,
-  getCarById,
-  addCar,
+	getAllTypeAutos,
+	addTypeAuto,
+	getAllCarsByType,
+	getAllCarsByTypeWithFilters,
+	getCarById,
+	addCar,
 } = require("../controllers/autos");
 
-router.get("/marque", getAllMarquesAutos);
+router.get("/type", getAllTypeAutos);
 
-router.post("/marque", addMarqueAuto);
+router.post("/type", addTypeAuto);
 
-router.get("/marque/:slug", getAllCarsByMarque);
+router.get("/type/:slug", getAllCarsByType);
 
-router.get("/model", getAllCarsByMarqueWithFilters);
+router.get("/model", getAllCarsByTypeWithFilters);
 
 router.get("/model/:id", getCarById);
 

@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAllMarquesMotos,
-  addMarqueMoto,
-  getAllMotosByMarque,
-  getAllMotosByMarqueWithFilters,
-  getMotoById,
-  addMoto,
-  getAllTypes,
-  addType,
+	getAllTypesMotos,
+	getAllMotos,
+	getAllMotosByType,
+	getAllMotosByTypeWithFilters,
+	getMotoById,
+	addMoto,
+	getAllTypes,
+	addType,
 } = require("../controllers/motos");
 
-router.get("/marque", getAllMarquesMotos);
+router.get("/type", getAllTypesMotos);
 
-router.post("/marque", addMarqueMoto);
+router.post("/type", getAllMotos);
 
-router.get("/marque/:slug", getAllMotosByMarque);
+router.get("/type/:slug", getAllMotosByType);
 
-router.get("/model", getAllMotosByMarqueWithFilters);
+router.get("/model", getAllMotosByTypeWithFilters);
 
 router.get("/model/:id", getMotoById);
 
