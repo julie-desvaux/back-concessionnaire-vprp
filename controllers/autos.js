@@ -1,6 +1,15 @@
 const TypeVL = require("../mongo/model/TypeVL");
 const Model = require("../mongo/model/ModelModel");
 
+const getAllAutos = async (req, res) => {
+	const types = await Model.find().populate("type").populate("marque").exec();
+	if (types) {
+		res.json(types);
+	} else {
+		res.json({ error: "notFound" });
+	}
+};
+
 const getAllTypeAutos = async (req, res) => {
 	const types = await TypeVL.find();
 	if (types) {
@@ -77,7 +86,23 @@ const getAllCarsByTypeWithFilters = async (req, res) => {
 
 const getCarById = async (req, res) => {
 	const id = req.params.id;
-	const model = await Model.findById(id).populate("type").exec();
+	const model = await Model.findById(id).populate("type").populate("marque").exec();
+	if (model) {
+		res.json(model);
+	} else {
+		res.json({ error: "notFound" });
+	}
+};
+
+const updateCarById = async (req, res) => {
+	const id = req.params.id;
+	const filter = { id };
+	const update = req.body;
+	const model = await Model.findOneAndUpdate(filter, update, {
+		new: true,
+	})
+		.populate("type")
+		.exec();
 	if (model) {
 		res.json(model);
 	} else {
@@ -102,10 +127,12 @@ const addCar = async (req, res) => {
 };
 
 module.exports = {
+	getAllAutos,
 	getAllTypeAutos,
 	addTypeAuto,
 	getAllCarsByType,
 	getAllCarsByTypeWithFilters,
 	getCarById,
+	updateCarById,
 	addCar,
 };
